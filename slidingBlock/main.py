@@ -1,7 +1,31 @@
 #!/usr/bin/env python
 
-level71=(4, '*', "7122334*564*56008800", "************00**00**", []) #line len, empty, start, solution
-level39=(4, '*', "0011002234**56775688", "************00**00**", []) #line len, empty, start, solution
+#The goal is to slide blocks to get out the 2x2 square
+#Each level description is composed of :
+#The level width (to split the level map)
+#What is the empty character
+#The level map : Each character is a block. I used the 0 for the 2x2 square block
+# 7 1 2 2
+# 3 3 4 *
+# 5 6 4 *
+# 5 6 0 0
+# 8 8 0 0
+# 
+# => 7122334*564*56008800
+#
+#The solution map, only needed characters are used, otherwise it's empty
+# * * * *
+# * * * *
+# * * * *
+# 0 0 * *
+# 0 0 * *
+#
+# => ************00**00**
+#
+#A list containing similar block, for optimisation purpose (Two 1x1 square can be exanged, it's the same state)
+
+level71=(4, '*', "7122334*564*56008800", "************00**00**") #line len, empty, start, solution
+level39=(4, '*', "0011002234**56775688", "************00**00**") #line len, empty, start, solution
 level46=(4, '*', "1223455367**67008800", "************00**00**", ['582', '673']) #line len, empty, start, solution
 level56=(4, '*', "10021002355637864**9", "*************00**00*", ['1236', '4789']) #line len, empty, start, solution, are sames
 
