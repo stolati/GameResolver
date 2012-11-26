@@ -1,0 +1,8 @@
+34 codeBox
+54 sliding picture
+61 dominos
+68 solitaires
+70 magic square
+72 untangle
+74 button gauge
+80 bulbe
