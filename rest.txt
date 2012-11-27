@@ -1,4 +1,3 @@
-34 codeBox
 54 sliding picture
 61 dominos
 68 solitaires
