@@ -4,7 +4,12 @@ from random import randrange, seed, choice
 from itertools import ifilter, izip
 import itertools
 
-#seed(1234567)
+#This problem is like a mastermind,
+# except with less choice (6 instead of 8)
+# except with more slot (6 intead of 4)
+# except without the "good but bad place" result, only good or bad
+
+
 
 ###############################
 # Utils
@@ -125,6 +130,21 @@ class RandomProblem(FixedProblem):
   def __call__(self): return RandomProblem(self.probDef)
 
 
+class HumainProblem(Problem):
+  def __init__(self, probDef):
+    self.probDef = probDef
+    self.nbTries = 0
+
+  def __call__(self): return HumainProblem(self.probDef)
+
+  def tryMe(self, tryContent):
+    self.nbTries += 1
+    print self.probDef.toHumain(tryContent, "Step %s, try this solution :" % self.nbTries)
+    nb = int(raw_input("How many elements are good ? : "))
+    return nb
+
+
+
 ###############################
 # Problem resolver
 ###############################
@@ -178,6 +198,7 @@ class FilterResolver(Resolver): #8
      self.probDef = probDef
      self.listAll = listAll or list( combinaison_with_doublon_and_order( list(range(probDef.nbElements)), probDef.nbPlaces) )
      self.curList = self.listAll
+     print len(self.listAll)
 
    def __call__(self): return FilterResolver(self.probDef, self.listAll)
 
@@ -188,9 +209,8 @@ class FilterResolver(Resolver): #8
      self.curList = [e for e in self.curList if nbDiff(tryContent, e) == number]
 
 
-# I though I could
-
-
+#I could have done an algorythme to split the self.listAll by 6*6*6*6*6*6 part equals
+#But the FilterResolver is good
 
 
 
@@ -201,11 +221,13 @@ class FilterResolver(Resolver): #8
 
 if __name__ == "__main__":
 
-  d = ProblemDefinition(6, 6, 10)
+  #d = ProblemDefinition(6, 6, 10)
   #d = ProblemDefinition(6, 6, 10, ['Tree','Butterfly','Turtle','Moon','Fire','Square'])
- 
+  d = ProblemDefinition(4, 8, 10, ['Red', 'Green', 'Blue', 'Yellow', 'Marron', 'Orange', 'Black', 'White']) #mastermind
+
   #prob = FixedProblem([5, 1, 0, 5, 0, 5])
-  prob = RandomProblem(d)
+  #prob = RandomProblem(d)
+  prob = HumainProblem(d)
   
   #reso = RandomResolver(d)
   #reso = FixedResolver([5, 1, 0, 5, 0, 5])
